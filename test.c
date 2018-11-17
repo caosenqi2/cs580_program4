@@ -9,12 +9,12 @@ int main(){
   ssize_t read;
   
   fp = fopen("players.dat", "r");
-  if (fp == NULL)
-    exit(EXIT_FAILURE);
+  //if (fp == NULL)
+   //exit(EXIT_FAILURE);
   
   while ((read = getline(&line, &len, fp)) != -1) {
-    printf("Retrieved line of length %zu :\n", read);
-    printf("%s", line);
+    
+    //printf("%s", line);
   }
   
   fclose(fp);
