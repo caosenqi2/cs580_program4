@@ -11,8 +11,8 @@ typedef struct Player{
 } Player;
 
 typedef struct Team{
-  char *name;
-  Player *players;
+  char * name;
+  Player * players;
   void (*delete) (struct Team * team);
 } Team;
 
