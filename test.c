@@ -12,7 +12,7 @@ int main(){
     char* token; 
     char* rest = line; 
     
-    while ((token = strtok_r(rest, " ", &rest))) 
+    while ((token = strtok_r(rest, ",", &rest))) 
       printf("%s", token); 
     //printf("%s", line);
   }
