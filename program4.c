@@ -12,14 +12,6 @@
 #define NUM_TEAMS 32
 #define NUM_PLAYERS 10
 
-Player * draftPlayers(char * filename, int team, int num_players);
-
-Team * newTeam(char * name, Player * players);
-
-Team * game(Team *, Team *);
-
-Team * tournament(Team **, int);
-
 int inLeague(Team *, Team **);
 
 int main(){
