@@ -9,12 +9,12 @@ int main(){
   ssize_t read;
   
   while ((read = getline(&line, &len, fp)) != -1) {
-    //char* token; 
-    //char* rest; 
+    char* token; 
+    char* rest = line; 
     
-    //while ((token = strtok_r(line, " ", &line))) 
-      //printf("%s", token); 
-    printf("%s", line);
+    while ((token = strtok_r(rest, " ", &rest))) 
+      printf("%s", token); 
+    //printf("%s", line);
   }
   
   fclose(fp);
