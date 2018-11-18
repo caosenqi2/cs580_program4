@@ -7,7 +7,6 @@
 #include <string.h>
 
 #define DEBUG 1
-
 #define NUM_TEAMS 32
 #define NUM_PLAYERS 10
 
@@ -27,19 +26,32 @@ int main(){
   ssize_t read;
   
   while ((read = getline(&line, &len, fp)) != -1) {
-    char* token; 
-    char* rest = line; 
+    char* token;
+    char* rest = line;
     
-    while ((token = strtok_r(rest, ",", &rest))) 
-      printf("%s\n", token); 
+    while ((token = strtok_r(rest, ",", &rest))) {
+      //printf("%s\n", token); 
+      
+    }
+      
+    
     //printf("%s", line);
   }
-  
-  fclose(fp);
-  //if (line)
-    //free(line);
-  //exit(EXIT_SUCCESS);
 
+  fclose(fp);
+  if (line)
+    free(line);
+  //exit(EXIT_SUCCESS);
+  
+  
+  Player * players = malloc(10*sizeof(Player));
+  Player * t = players;
+  printf("hello%d\n",sizeof(Player));
+  printf("hello%d\n",t);
+  t++;
+  printf("hello1%d\n",t);
+
+  free(players);
   
   char * team_names[] = {
     "team1",
@@ -94,11 +106,5 @@ int main(){
     Player * draft = draftPlayers("players.dat", counter, NUM_PLAYERS);
     for(int i = 0; i < NUM_PLAYERS; i++)
       assert(draft[0].team == counter%NUM_TEAMS);
-    league[counter] = newTeam(team_names[counter], draft);
-    assert(sizeof((league[counter]->players[rand() % NUM_PLAYERS])) == sizeof(Player));
-    assert((league[counter]->players[rand() % NUM_PLAYERS]).offensive > 0);
-    assert((league[counter]->players[rand() % NUM_PLAYERS]).defensive > 0);
-    assert(sizeof(*(league[counter])) == sizeof(Team));
-  }
-  printf("\n\t\t....Test Passed\n");
+}
 }
