@@ -25,30 +25,28 @@ int main(){
   size_t len = 0;
   ssize_t read;
   
+  Player * players = malloc(10*sizeof(Player));
+  Player * t = players;
+  
   while ((read = getline(&line, &len, fp)) != -1) {
     char* token;
     char* rest = line;
     
     while ((token = strtok_r(rest, ",", &rest))) {
       //printf("%s\n", token); 
-      
+      t->defensive = token;
+      t->first = token;
+      t->last = token;
+      t->number = token;
+      t->offensive = token;
+      t->team = token;
+      t++;
+      printf("%s\n", t->team);
     }
-      
-    
-    //printf("%s", line);
   }
 
   fclose(fp);
   if (line)
     free(line);
-  //exit(EXIT_SUCCESS);
-  
-  
-  Player * players = malloc(10*sizeof(Player));
-  Player * t = players;
-
-  t++;
-
-  //free(t);
   free(players);
 }
