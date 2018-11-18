@@ -46,11 +46,9 @@ int main(){
   
   Player * players = malloc(10*sizeof(Player));
   Player * t = players;
-  printf("hello%d\n",sizeof(Player));
-  printf("hello%d\n",t);
+
   t++;
-  printf("hello1%d\n",t);
-  
-  free(t);
+
+  //free(t);
   free(players);
 }
