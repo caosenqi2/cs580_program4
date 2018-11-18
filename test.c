@@ -33,9 +33,15 @@ int main(){
     char* rest = line;
     
     while ((token = strtok_r(rest, ",", &rest))) {
-      printf("%s\n", token); 
-      printf("he");
+      //printf("%s\n", token); 
+      t->team = token;
+      t->first = token;
+      t->last = token;
+      t->number = token;
+      t->offensive = token;
+      t->defensive = token;
       t++;
+      printf("%s\n", t->team);
     }
   }
 

@@ -2,12 +2,12 @@
 #define ROURNAMENT_H
 
 typedef struct Player{
-  int offensive;
-  int defensive;
-  int number;
   int team;
   char * first;
   char * last;
+  int number;
+  int offensive;
+  int defensive;
 } Player;
 
 typedef struct Team{
