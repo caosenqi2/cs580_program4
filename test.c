@@ -11,13 +11,50 @@
 #define NUM_PLAYERS 10
 
 Player * draftPlayers(char * filename, int team, int num_players){
-  Player * players = malloc(num_players*sizeof(Player));
-  Player * t = players;
-  t++;
+  FILE * fp = fopen(filename, "r");
   
-  free(players);
+  char * line = NULL;
+  size_t len = 0;
+  ssize_t read;
+  Player players[num_players];
+  
+  while ((read = getline(&line, &len, fp)) != -1) {
+    //printf("%s\n",line);
+    char *token = strtok(line, ",");
+    
+    if (atoi(token) == team){
+      players[0].team = atoi(token);
+      token = strtok(NULL, ",");
+      
+      players[1].first = token;
+      token = strtok(NULL, ",");
+      
+      players[2].last = token;
+      token = strtok(NULL, ",");
+      
+      players[3].number = atoi(token);
+      token = strtok(NULL, ",");
+      
+      players[4].offensive = atoi(token);
+      token = strtok(NULL, ",");
+      
+      players[5].defensive = atoi(token);
+      token = strtok(NULL, ",");
+      
+      printf("team:%d\n", players[0].team);
+      printf("first:%s\n", players[1].first);
+      printf("last:%s\n", players[2].last);
+      printf("num:%d\n", players[3].number);
+      printf("off:%d\n", players[4].offensive);
+      printf("deff:%d\n", players[5].defensive);
+    }
+  }
+  
+  fclose(fp);
+  if (line)
+    free(line);
   return players;
-};
+}
 
 int main(){
   FILE * fp = fopen("players.dat", "r");
@@ -25,44 +62,44 @@ int main(){
   char * line = NULL;
   size_t len = 0;
   ssize_t read;
-  
-  Player ** players = malloc(10*sizeof(Player));
-  Player * t = players;
+  Player players[320];
   
   while ((read = getline(&line, &len, fp)) != -1) {
-    printf("%s\n",line);
+    //printf("%s\n",line);
     char *token = strtok(line, ",");
     
-    t->team = atoi(token);
-    token = strtok(NULL, ",");
+    if (atoi(token) == 1){
+      players[0].team = atoi(token);
+      token = strtok(NULL, ",");
+      
+      players[1].first = token;
+      token = strtok(NULL, ",");
+      
+      players[2].last = token;
+      token = strtok(NULL, ",");
+      
+      players[3].number = atoi(token);
+      token = strtok(NULL, ",");
+      
+      players[4].offensive = atoi(token);
+      token = strtok(NULL, ",");
+      
+      players[5].defensive = atoi(token);
+      token = strtok(NULL, ",");
+      
+      printf("team:%d\n", players[0].team);
+      printf("first:%s\n", players[1].first);
+      printf("last:%s\n", players[2].last);
+      printf("num:%d\n", players[3].number);
+      printf("off:%d\n", players[4].offensive);
+      printf("deff:%d\n", players[5].defensive);
+    }
     
-    t->first = token;
-    token = strtok(NULL, ",");
     
-    t->last = token;
-    token = strtok(NULL, ",");
-    
-    t->number = atoi(token);
-    token = strtok(NULL, ",");
-    
-    t->offensive = atoi(token);
-    token = strtok(NULL, ",");
-    
-    t->defensive = atoi(token);
-    token = strtok(NULL, ",");
-    
-    printf("team:%d\n", t->team);
-    printf("first:%s\n", t->first);
-    printf("last:%s\n", t->last);
-    printf("num:%d\n", t->number);
-    printf("off:%d\n", t->offensive);
-    printf("deff:%d\n", t->defensive);
-    
-    t++;
   }
 
   fclose(fp);
   if (line)
     free(line);
-  free(players);
+  draftPlayers("players.dat",2,10);
 }
