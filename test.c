@@ -105,6 +105,17 @@ Team * game(Team * team1, Team * team2){
   }
 };
 
+Team * tournament(Team ** league, int n){
+  while(n != 1){
+    if (n%2 == 0){
+      n = n/2;
+    }
+    else{
+      return NULL;
+    }
+  }
+}
+
 int main(){
   FILE * fp = fopen("players.dat", "r");
   char * line = NULL;
@@ -236,5 +247,12 @@ int main(){
   winner = game(league[team_num], league[team_num]);
   assert(winner == league[team_num]);
   printf("The winning team is %s\n\n", winner->name);
+  printf("\n\t\t....Test Passed\n");
+  printf("\t-----------------------------------\n");
+  printf("\t-   Part3 : Running a Tournament  -\n");
+  printf("\t-----------------------------------\n");
+  printf("\n\t=========Test #5: Ensure number of teams is a power of 2===========\n\n");
+  winner = tournament(league, 20);
+  assert(winner == NULL);
   printf("\n\t\t....Test Passed\n");
 }
