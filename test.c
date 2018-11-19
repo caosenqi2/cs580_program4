@@ -10,6 +10,8 @@
 #define NUM_TEAMS 32
 #define NUM_PLAYERS 10
 
+Player players[10];
+
 Player * draftPlayers(char * filename, int team, int num_players){
   FILE * fp = fopen(filename, "r");
   
@@ -17,7 +19,7 @@ Player * draftPlayers(char * filename, int team, int num_players){
   size_t len = 0;
   ssize_t read;
   //Player players[num_players];
-  Player * players = malloc(num_players*sizeof(Player));
+  //Player * players = malloc(num_players*sizeof(Player));
   int i = 0;
   while ((read = getline(&line, &len, fp)) != -1) {
     //printf("%s\n",line);
@@ -56,7 +58,7 @@ Player * draftPlayers(char * filename, int team, int num_players){
   fclose(fp);
   if (line)
     free(line);
-  free(players);
+  //free(players);
   return players;
 }
 
@@ -122,7 +124,7 @@ int main(){
   fclose(fp);
   if (line)
     free(line);
-  free(players);
+  //free(players);
   
   
   /*****  Change the team names to names of your choosing ******/
