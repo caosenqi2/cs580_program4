@@ -11,7 +11,7 @@
 #define NUM_PLAYERS 10
 
 Player players[NUM_PLAYERS];
-
+int inLeague(Team *, Team **);
 Player * draftPlayers(char * filename, int team, int num_players){
   FILE * fp = fopen(filename, "r");
   
@@ -94,8 +94,6 @@ Team * game(Team * team1, Team * team2){
     offensive_2 += team2->players[i].offensive;
   }
   while(score_1 == score_2){
-    int s1 = rand() % (offensive_1 + 1);
-
     if (rand() % (offensive_1 + 1) > deffensive_2) score_1+=1;
     if (rand() % (offensive_1 + 1) > deffensive_2) score_1+=1;
     if (rand() % (offensive_2 + 1) > deffensive_1) score_2+=1;
@@ -111,9 +109,25 @@ Team * tournament(Team ** league, int n){
       n = n/2;
     }
     else{
+      printf("The number of teams is invalid.");
       return NULL;
     }
   }
+  
+  Team * team1 = league[0];
+  Team * team2;
+  printf("begin");
+  
+  for (int i=1;i<n;i++){
+    printf("i%d\n",i);
+    printf("hello");
+    team2 = league[i];
+    team1 = game(team1,team2);
+    printf("winner%s, ",team1->name);
+  }
+  
+  printf("lastwinner:%s, ",team1->name);
+  return team1;
 }
 
 int main(){
@@ -255,4 +269,44 @@ int main(){
   winner = tournament(league, 20);
   assert(winner == NULL);
   printf("\n\t\t....Test Passed\n");
+  printf("\n\t=========Test #6: Should result in a single winner===========\n\n");
+  winner = tournament(league, NUM_TEAMS/4);
+  assert(inLeague(winner, league));
+  winner = tournament(league, NUM_TEAMS/2);
+  assert(inLeague(winner, league));
+  winner = tournament(league, NUM_TEAMS);
+  assert(inLeague(winner, league));
+  printf("\n************************ Result *******************************\n\n");
+  printf("The winning team is %s\n\n", winner->name);
+  printf("\n\t\t....Test Passed\n");
+  
+  printf("\n\t=========Test #7: Should result in a random winner===========\n\n");
+  const int NUM_SEASONS = 25;
+  Team * winners[NUM_SEASONS];
+  for(int counter = 0; counter < NUM_SEASONS; counter++){
+    winners[counter] = tournament(league, NUM_TEAMS);
+    printf("Winner is %s\n", winners[counter]->name);
+    assert(inLeague(winners[counter], league));
+  }
+  printf("good");
+  Team * randomness_test = winners[0];
+  int is_random = 0;
+  for(int counter = 1; counter < NUM_SEASONS; counter++){
+    if(randomness_test != winners[counter]){
+      is_random = 1;
+    }
+  }
+  assert(is_random);
+  printf("\n\t\t....Test Passed\n");
+}
+
+
+int inLeague(Team * t, Team ** league){
+  int i = 0;
+  for(; i < NUM_TEAMS; i++){
+    if(league[i] == t){
+      return 1;
+    }
+  }
+  return 0;
 }
