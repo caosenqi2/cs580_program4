@@ -59,6 +59,7 @@ Player * draftPlayers(char * filename, int team, int num_players){
   free(players);
   return players;
 }
+
 void deleteTeam(Team * t){
   free(t->name);
   free(t->players);
@@ -121,7 +122,7 @@ int main(){
   fclose(fp);
   if (line)
     free(line);
-  
+  free(players);
   
   
   /*****  Change the team names to names of your choosing ******/
