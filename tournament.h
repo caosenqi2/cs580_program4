@@ -1,5 +1,5 @@
 #ifndef ROURNAMENT_H
-//#define ROURNAMENT_H
+#define ROURNAMENT_H
 
 typedef struct Player{
   int team;

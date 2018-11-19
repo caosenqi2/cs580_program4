@@ -3,13 +3,15 @@
 ### PROGRAM 4 README FILE
 
 ## KNOWN BUGS AND INCOMPLETE PARTS:
-- What parts of the program you were not able to complete
+- None.
 
 ## REFERENCES:
-- List any outside resources used
+- to read a file line by line, I used the method provided here: https://stackoverflow.com/questions/3501338/c-read-file-line-by-line
 
+ to get tokens, I used method found here: https://www.geeksforgeeks.org/strtok-strtok_r-functions-c-examples/
+ 
 ## MISCELLANEOUS COMMENTS:
-- Anything you would like the grader to know
+- Please ask the professor about the penalty for my project this time. 
 
 # Assignment Description
 ## Program 4 - Files and Structures
