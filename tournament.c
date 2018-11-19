@@ -12,11 +12,8 @@ Player * draftPlayers(char * filename, int team, int num_players){
   char * line = NULL;
   size_t len = 0;
   ssize_t read;
-  //Player players[num_players];
-  //Player * players = malloc(num_players*sizeof(Player));
   int i = 0;
   while ((read = getline(&line, &len, fp)) != -1) {
-    //printf("%s\n",line);
     char *token = strtok(line, ",");
     
     if (atoi(token) == team){
@@ -38,25 +35,16 @@ Player * draftPlayers(char * filename, int team, int num_players){
       players[i].defensive = atoi(token);
       token = strtok(NULL, ",");
       i++;
-      //printf("team:%d\n", players[0].team);
-      //printf("first:%s\n", players[1].first);
-      //printf("last:%s\n", players[2].last);
-      //printf("num:%d\n", players[3].number);
-      //printf("off:%d\n", players[4].offensive);
-      //printf("deff:%d\n", players[5].defensive);
     }
   }
   
   fclose(fp);
   if (line)
     free(line);
-  //free(players);
   return players;
 }
 
 void deleteTeam(Team * team){
-  //free(team->name);
-  //free(team->players);
   free(team);
 };
 
@@ -79,7 +67,6 @@ Team * game(Team * team1, Team * team2){
   int score_2 = 0;
   
   for (i=0;i<10;i++){
-    //printf("offensives:%d\n",players[i].offensive);
     deffensive_1 += team1->players[i].defensive;
     deffensive_2 += team2->players[i].defensive;
     offensive_1 += team1->players[i].offensive;
@@ -92,7 +79,6 @@ Team * game(Team * team1, Team * team2){
     if (rand() % (offensive_2 + 1) > deffensive_1) score_2+=1;
     
     if (score_1 > score_2) return team1;
-    
     if (score_2 > score_1) return team2;
   }
 };

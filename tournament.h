@@ -16,5 +16,4 @@ typedef struct Team{
   void (*delete) (struct Team * team);
 } Team;
 
-
 #endif
