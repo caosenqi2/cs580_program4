@@ -55,8 +55,8 @@ Player * draftPlayers(char * filename, int team, int num_players){
 }
 
 void deleteTeam(Team * team){
-  free(team->name);
-  free(team->players);
+  //free(team->name);
+  //free(team->players);
   free(team);
 };
 
@@ -79,25 +79,45 @@ Team * game(Team * team1, Team * team2){
   int score_2 = 0;
   
   for (i=0;i<10;i++){
-    printf("offensives:%d\n",players[i].offensive);
+    //printf("offensives:%d\n",players[i].offensive);
     deffensive_1 += team1->players[i].defensive;
     deffensive_2 += team2->players[i].defensive;
     offensive_1 += team1->players[i].offensive;
     offensive_2 += team2->players[i].offensive;
   }
   while(score_1 == score_2){
-    int s1 = rand() % (offensive_1 + 1);
+    if (rand() % (offensive_1 + 1) > deffensive_2) score_1+=1;
+    if (rand() % (offensive_1 + 1) > deffensive_2) score_1+=1;
+    if (rand() % (offensive_2 + 1) > deffensive_1) score_2+=1;
+    if (rand() % (offensive_2 + 1) > deffensive_1) score_2+=1;
     
-    if (rand() % (offensive_1 + 1) > deffensive_2) score_1+=1;
-    if (rand() % (offensive_1 + 1) > deffensive_2) score_1+=1;
-    if (rand() % (offensive_2 + 1) > deffensive_1) score_2+=1;
-    if (rand() % (offensive_2 + 1) > deffensive_1) score_2+=1;
     if (score_1 > score_2) return team1;
-    if (score_2 > score_1) return team1;
+    
+    if (score_2 > score_1) return team2;
   }
-}
+};
 
-Team * tournament(Team **, int);
+Team * tournament(Team ** league, int n){
+  int N = n;
+  while(n != 1){
+    if (n%2 == 0){
+      n = n/2;
+    }
+    else{
+      printf("The number of teams is invalid.");
+      return NULL;
+    }
+  }
+  
+  Team * team1 = league[0];
+  Team * team2;
+  int i = 0;
+  for (i=1;i<N;i++){
+    team2 = league[i];
+    team1 = game(team1,team2);
+  }
+  return team1;
+}
 
 
 
