@@ -63,8 +63,8 @@ Player * draftPlayers(char * filename, int team, int num_players){
 }
 
 void deleteTeam(Team * team){
-  free(team->name);
-  free(team->players);
+  //free(team->name);
+  //free(team->players);
   free(team);
 };
 
@@ -87,7 +87,7 @@ Team * game(Team * team1, Team * team2){
   int score_2 = 0;
   
   for (i=0;i<10;i++){
-    printf("offensives:%d\n",players[i].offensive);
+    //printf("offensives:%d\n",players[i].offensive);
     deffensive_1 += team1->players[i].defensive;
     deffensive_2 += team2->players[i].defensive;
     offensive_1 += team1->players[i].offensive;
@@ -98,12 +98,15 @@ Team * game(Team * team1, Team * team2){
     if (rand() % (offensive_1 + 1) > deffensive_2) score_1+=1;
     if (rand() % (offensive_2 + 1) > deffensive_1) score_2+=1;
     if (rand() % (offensive_2 + 1) > deffensive_1) score_2+=1;
+    
     if (score_1 > score_2) return team1;
-    if (score_2 > score_1) return team1;
+
+    if (score_2 > score_1) return team2;
   }
 };
 
 Team * tournament(Team ** league, int n){
+  int N = n;
   while(n != 1){
     if (n%2 == 0){
       n = n/2;
@@ -114,19 +117,13 @@ Team * tournament(Team ** league, int n){
     }
   }
   
-  Team * team1 = league[2];
+  Team * team1 = league[0];
   Team * team2;
-  printf("begin");
-  
-  for (int i=1;i<n;i++){
-    printf("i%d\n",i);
-    printf("hello");
+  int i = 0;
+  for (i=1;i<N;i++){
     team2 = league[i];
     team1 = game(team1,team2);
-    printf("winner%s, ",team1->name);
   }
-  
-  printf("lastwinner:%s, ",team1->name);
   return team1;
 }
 
@@ -298,6 +295,14 @@ int main(){
   }
   assert(is_random);
   printf("\n\t\t....Test Passed\n");
+  printf("\n\t=========Test #8: Delete team method should clean up memory for each team ===========\n\n");
+  //free team array.
+  for(int counter = 0; counter < NUM_TEAMS; counter++){
+    league[counter]->delete(league[counter]);
+  }
+  printf("good for now");
+  free(league);
+  printf("\n\t=========All Tests Passed. Don't forget to check Valgrind!===========\n\n");
 }
 
 
