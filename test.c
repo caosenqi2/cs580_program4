@@ -114,7 +114,7 @@ Team * tournament(Team ** league, int n){
     }
   }
   
-  Team * team1 = league[0];
+  Team * team1 = league[2];
   Team * team2;
   printf("begin");
   
