@@ -3,15 +3,15 @@
 
 typedef struct Player{
   int team;
-  char * first;
-  char * last;
+  char first[100];
+  char last[100];
   int number;
   int offensive;
   int defensive;
 } Player;
 
 typedef struct Team{
-  char * name;
+  char name[100];
   Player * players;
   void (*delete) (struct Team * team);
 } Team;
