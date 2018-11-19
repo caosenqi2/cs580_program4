@@ -16,4 +16,10 @@ typedef struct Team{
   void (*delete) (struct Team * team);
 } Team;
 
+Player * draftPlayers(char * filename, int team, int num_players);
+void deleteTeam(Team * team);
+Team * newTeam(char * name, Player * players);
+Team * game(Team * team1, Team * team2);
+Team * tournament(Team ** league, int n);
+
 #endif
